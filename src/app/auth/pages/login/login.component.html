@@ -1,0 +1,62 @@
+<div class="w-full my-8 flex items-center justify-center ">
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit()"
+        class="w-full md:w-2/3 rounded-lg">
+        <h2 class="text-2xl text-center text-main-600 mb-8">Register</h2>
+        <div class="px-12 pb-10">
+
+            <!-- Email Input -->
+            <div class="w-full mb-2">
+                <div class="flex items-center">
+                    <input
+                        type="email"
+                        placeholder="Email Address"
+                        class="
+                  w-full
+                  border-main-200
+                  rounded
+                  px-3
+                  py-2
+                    focus:ring-1
+                    focus:ring-main-600
+                "
+                        formControlName="email" />
+                </div>
+            </div>
+
+            <!-- Password Input -->
+            <div class="w-full mb-2">
+                <div class="flex items-center">
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        class="
+                  w-full
+                  border-main-200
+                  rounded
+                  px-3
+                  py-2
+                    focus:ring-1
+                    focus:ring-main-600
+                "
+                        formControlName="password" />
+                </div>
+            </div>
+
+            <!-- Register Button -->
+            <button
+                class="
+              w-full
+              py-2
+              mt-8
+              rounded-full
+              bg-main-600
+              text-white
+              focus:outline-none
+              hover:bg-main-800
+              transition-colors
+            ">
+                Register
+            </button>
+        </div>
+    </form>
+</div>
