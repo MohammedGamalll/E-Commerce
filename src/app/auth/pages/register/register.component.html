@@ -1,8 +1,9 @@
  <div class="w-full my-8 flex items-center justify-center ">
     <form [formGroup]="myForm" (ngSubmit)="onSubmit()"
         class="w-full md:w-2/3 rounded-lg">
-        <h2 class="text-2xl text-center text-main-600 mb-8">Register</h2>
+        <h2 class="text-2xl text-center text-main-800 mb-8">Register</h2>
         <div class="px-12 pb-10">
+            @let name = myForm.get('name');
             <!-- Name Input -->
             <div class="w-full mb-2 relative">
                 <input type="text" id="name" formControlName="name"
@@ -13,8 +14,40 @@
                     peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
                     Name</label>
             </div>
+            @if (name?.errors &&
+            name?.touched) {
+            <div
+                class="flex p-4 my-4 text-sm text-red-500 rounded-lg bg-main-000 "
+                role="alert">
+                <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                </svg>
+                <span class="sr-only">Danger</span>
+                <div>
+                    <span class="font-medium">Ensure that these requirements are
+                        met:</span>
+                    <ul class="mt-1.5 list-disc list-inside capitalize">
+                        @if (name?.getError('required')) {
+                        <li>This Field is Required</li>
+                        }
+                        @else if (name?.getError('minlength')) {
+                        <li>The min Lenght is 3 character</li>
+                        }
+                        @else if (name?.getError('maxlength')) {
+                        <li>The max length is 20 character</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            }
+
             <!-- Email Input -->
             <div class="w-full mb-2 relative">
+                @let email = myForm.get('email');
+
                 <input type="email" id="email" formControlName="email"
                     class="text-black block px-2.5 pb-2.5 pt-4 w-full text-sm bg-transparent rounded-lg border-1 border-main-200 appearance-none focus:outline-none focus:ring-1 focus:ring-main-300 peer"
                     placeholder />
@@ -23,8 +56,38 @@
                     peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
                     Email Address</label>
             </div>
+            @if (email?.errors &&
+            email?.touched) {
+            <div
+                class="flex p-4 my-4 text-sm text-red-500 rounded-lg bg-main-000 "
+                role="alert">
+                <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                </svg>
+                <span class="sr-only">Danger</span>
+                <div>
+                    <span class="font-medium">Ensure that these requirements are
+                        met:</span>
+                    <ul class="mt-1.5 list-disc list-inside capitalize">
+                        @if (email?.getError('required')) {
+                        <li>This Field is Required</li>
+                        }
+                        @else if (email?.getError('email')) {
+                        <li>Please enter a valid email address. :)</li>
+                        }
+
+                    </ul>
+                </div>
+            </div>
+            }
+
             <!-- Password Input -->
             <div class="w-full mb-2 relative">
+                @let password = myForm.get('password');
+
                 <input type="password" id="password" formControlName="password"
                     class="text-black block px-2.5 pb-2.5 pt-4 w-full text-sm bg-transparent rounded-lg border-1 border-main-200 appearance-none focus:outline-none focus:ring-1 focus:ring-main-300 peer"
                     placeholder />
@@ -33,22 +96,86 @@
                     peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
                     Password</label>
             </div>
+            @if (password?.errors &&
+            password?.touched) {
+            <div
+                class="flex p-4 my-4 text-sm text-red-500 rounded-lg bg-main-000 "
+                role="alert">
+                <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                </svg>
+                <span class="sr-only">Danger</span>
+                <div>
+                    <span class="font-medium">Ensure that these requirements are
+                        met:</span>
+                    <ul class="mt-1.5 list-disc list-inside capitalize">
+                        @if (password?.getError('required')) {
+                        <li>This Field is Required</li>
+                        }
+                        @else if (password?.getError('minlength')) {
+                        <li>Please enter at least 8 characters.</li>
+                        }
+                        @else if (password?.getError('pattern')) {
+                        <li>Please ensure the first character is uppercase,
+                            followed by at least 7 characters that can be
+                            lowercase letters or numbers.</li>
+                        }
+
+                    </ul>
+                </div>
+            </div>
+            }
 
             <!-- Confirm Password Input -->
 
             <div class="w-full mb-2 relative">
-                <input type="password" id="repassword"
-                    formControlName="repassword"
+                <input type="password" id="rePassword"
+                    formControlName="rePassword"
                     class="text-black block px-2.5 pb-2.5 pt-4 w-full text-sm bg-transparent rounded-lg border-1 border-main-200 appearance-none focus:outline-none focus:ring-1 focus:ring-main-300 peer"
                     placeholder />
-                <label for="repassword"
+                <label for="rePassword"
                     class="text-main-200 absolute text-sm duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white  px-2 peer-focus:px-2 peer-focus:text-main-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 
                     peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
                     Re-enter Password</label>
             </div>
+            @let rePassword = myForm.get('rePassword');
+
+            @if (myForm.errors?.['notSame'] &&
+            rePassword?.touched) {
+            <div
+                class="flex p-4 my-4 text-sm text-red-500 rounded-lg bg-main-000 "
+                role="alert">
+                <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                </svg>
+                <span class="sr-only">Danger</span>
+                <div>
+                    <span class="font-medium">Ensure that these requirements are
+                        met:</span>
+                    <ul class="mt-1.5 list-disc list-inside capitalize">
+                        @if (rePassword?.getError('required')) {
+                        <li>This Field is Required</li>
+                        }
+                        @else if (myForm.errors?.['notSame']) {
+                        <li>The passwords you entered do not match. Please
+                            re-enter your password.</li>
+                        }
+
+                    </ul>
+                </div>
+            </div>
+            }
 
             <!-- Phone input -->
             <div class="w-full mb-2 relative">
+                @let phone = myForm.get('phone');
+
                 <input type="tel" id="phone"
                     formControlName="phone"
                     class="text-black block px-2.5 pb-2.5 pt-4 w-full text-sm bg-transparent rounded-lg border-1 border-main-200 appearance-none focus:outline-none focus:ring-1 focus:ring-main-300 peer"
@@ -58,22 +185,66 @@
                     peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
                     Phone</label>
             </div>
+            @if (phone?.errors &&
+            phone?.touched) {
+            <div
+                class="flex p-4 my-4 text-sm text-red-500 rounded-lg bg-main-000 "
+                role="alert">
+                <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                </svg>
+                <span class="sr-only">Danger</span>
+                <div>
+                    <span class="font-medium">Ensure that these requirements are
+                        met:</span>
+                    <ul class="mt-1.5 list-disc list-inside capitalize">
+                        @if (phone?.getError('required')) {
+                        <li>This Field is Required</li>
+                        }
+                        @else if (phone?.getError('pattern')) {
+                        <li>Please enter a valid phone number in the format:
+                            01XXXXXXXXX.</li>
+                        }
+
+                    </ul>
+                </div>
+            </div>
+            }
 
             <!-- Register Button -->
             <button
+                [disabled]="myForm.invalid || myForm.pristine"
                 class="
               w-full
               py-2
               mt-8
-              rounded-full
-              bg-main-600
-              text-white
-              focus:outline-none
-              hover:bg-main-800
-              transition-colors
+              btn-main
+              disabled
             ">
                 Register
             </button>
+
+            <!-- Success Message -->
+            @if (successMessage) {
+            <div
+                class="bg-green-100 border-l-4 rounded-r-md border-green-500 text-green-700 p-4 my-4"
+                role="alert">
+                <p class="font-bold"></p>
+                <p>Account Created Successfully 🥳</p>
+            </div>
+            }
+            @if(failMessage) {
+            <div
+                class="bg-red-100 border-l-4 rounded-r-md border-red-500 text-red-700 p-4 my-4"
+                role="alert">
+                <p class="font-bold"></p>
+                <p>{{failMessage}}</p>
+            </div>
+            }
+
         </div>
     </form>
 </div>
