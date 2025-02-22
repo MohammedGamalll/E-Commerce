@@ -10,14 +10,26 @@ import { BrandsComponent } from './pages/brands/brands.component';
 import { ProductComponent } from './pages/product/product.component';
 import { DetailsComponent } from './pages/details/details.component';
 import { CartComponent } from './pages/cart/cart.component';
+import { ForgetPasswordComponent } from './auth/pages/forget-password/forget-password.component';
+import { verify } from 'crypto';
+import { VerifyResetCodeComponent } from './auth/pages/verify-reset-code/verify-reset-code.component';
+import { ResetPasswordComponent } from './auth/pages/reset-password/reset-password.component';
 
 export const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
   {
     path: '',
     component: AuthLayoutComponent,
     children: [
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
+      { path: 'forgetPassword', component: ForgetPasswordComponent },
+      { path: 'verifyResetCode', component: VerifyResetCodeComponent },
+      { path: 'resetPassword', component: ResetPasswordComponent },
     ],
   },
   {

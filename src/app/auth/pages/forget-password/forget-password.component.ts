@@ -5,22 +5,21 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { LoginService } from '../../services/login.service';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
+import { ResetPasswordService } from '../../services/resetPassword/reset-password.service';
 
 @Component({
-  selector: 'app-login',
-  imports: [ReactiveFormsModule, RouterLink],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
+  selector: 'app-forget-password',
+  imports: [ReactiveFormsModule],
+  templateUrl: './forget-password.component.html',
+  styleUrl: './forget-password.component.css',
 })
-export class LoginComponent {
+export class ForgetPasswordComponent {
   fb = inject(FormBuilder);
   router = inject(Router);
-  loginService = inject(LoginService);
+  resetPasswordService = inject(ResetPasswordService);
   myForm: FormGroup = this.fb.group({
     email: [null, [Validators.required]],
-    password: [null, [Validators.required]],
   });
 
   successMessage = '';
@@ -30,13 +29,13 @@ export class LoginComponent {
     console.log(this.myForm.value);
     this.successMessage = '';
     this.failMessage = '';
-    this.loginService.signIn(this.myForm.value).subscribe({
+    this.resetPasswordService.forgotPassword(this.myForm.value).subscribe({
       next: (response) => {
         console.log(response);
         this.successMessage = response.message;
         setTimeout(() => {
-          this.router.navigate(['main/home']);
-        }, 1000);
+          this.router.navigate(['verifyResetCode']);
+        }, 1500);
       },
       error: (error) => {
         console.log(error);

@@ -7,8 +7,9 @@
 @plugin "flowbite/plugin";
 @source "../node_modules/flowbite";
 
+
 .btn-main {
-    @apply cursor-pointer rounded-full bg-main-700 text-white hover:bg-main-800 transition-colors
+    @apply rounded-full bg-main-700 text-white hover:bg-main-800 transition-colors
 }
 
 .disabled {

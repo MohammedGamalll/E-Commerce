@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { HomeCategoriesComponent } from './home-categories/home-categories.component';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [RouterLink, HomeCategoriesComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.css',
 })
-export class HomeComponent {
-
-}
+export class HomeComponent {}

@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { CategoriesService } from '../../core/services/categories/categories.service';
+import { ICategory } from '../../core/interfaces/categories/icategory';
 
 @Component({
   selector: 'app-categories',
@@ -7,5 +9,24 @@ import { Component } from '@angular/core';
   styleUrl: './categories.component.css'
 })
 export class CategoriesComponent {
+categoriesService = inject(CategoriesService);
+  allCategories!: ICategory;
+  constructor() {}
 
+  ngOnInit(): void {
+    this.getAllCategories();
+  }
+
+  getAllCategories() {
+    this.categoriesService.getAllCategories().subscribe({
+      next: (data) => {
+        this.allCategories = data;
+
+        console.log(data);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
 }

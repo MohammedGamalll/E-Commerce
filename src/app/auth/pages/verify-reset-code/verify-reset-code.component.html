@@ -1,0 +1,75 @@
+<div class="w-full my-8 flex items-center justify-center ">
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit()"
+        class="w-full md:w-2/3 rounded-lg">
+        <h2 class="text-2xl text-center text-main-800 mb-8">Forget Password</h2>
+        <div class="px-12 pb-10">
+            <!-- resetCode Input -->
+            <div class="w-full mb-2 relative">
+                @let resetCode = myForm.get('resetCode');
+
+                <input type="password" id="resetCode" formControlName="resetCode"
+                    class="text-black block px-2.5 pb-2.5 pt-4 w-full text-sm bg-transparent rounded-lg border-1 border-main-200 appearance-none focus:outline-none focus:ring-1 focus:ring-main-300 peer"
+                    placeholder />
+                <label for="resetCode"
+                    class="text-main-200 absolute text-sm duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white  px-2 peer-focus:px-2 peer-focus:text-main-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 
+                    peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
+                    Enter The Code </label>
+            </div>
+            @if (resetCode?.errors &&
+            resetCode?.touched) {
+            <div
+                class="flex p-4 my-4 text-sm text-red-500 rounded-lg bg-main-000 "
+                role="alert">
+                <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                </svg>
+                <span class="sr-only">Danger</span>
+                <div>
+                    <span class="font-medium">Ensure that these requirements are
+                        met:</span>
+                    <ul class="mt-1.5 list-disc list-inside capitalize">
+                        @if (resetCode?.getError('required')) {
+                        <li>This Field is Required</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            }
+
+            <!-- Login Button -->
+            <button
+                [disabled]="myForm.invalid || myForm.pristine"
+                class="
+              w-full
+              py-2
+              mt-8
+              btn-main
+              disabled
+            ">
+                Continue
+            </button>
+
+            <!-- Success Message -->
+            @if (successMessage) {
+            <div
+                class="bg-green-100 border-l-4 rounded-r-md border-green-500 text-green-700 p-4 my-4"
+                role="alert">
+                <p class="font-bold"></p>
+                <p>{{successMessage}}</p>
+            </div>
+            }
+            @if(failMessage) {
+            <div
+                class="bg-red-100 border-l-4 rounded-r-md border-red-500 text-red-700 p-4 my-4"
+                role="alert">
+                <p class="font-bold"></p>
+                <p>{{failMessage}}</p>
+            </div>
+            }
+
+        </div>
+    </form>
+</div>

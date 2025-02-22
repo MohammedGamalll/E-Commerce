@@ -1,0 +1,31 @@
+@font-face {
+    font-family: "h1Font";
+    src: url(/fonts/Kugile_Demo.ttf);
+
+}
+
+header {
+    position: relative;
+    background-image: url('/images/freepik__adjust__67819.png');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+}
+
+
+header h1 {
+    font-family: "h1Font", serif;
+    font-weight: 900;
+
+}
+
+header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.249);
+    z-index: 1;
+}

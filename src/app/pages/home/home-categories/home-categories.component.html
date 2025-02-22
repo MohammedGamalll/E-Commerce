@@ -1,0 +1,22 @@
+@if(allCategories){
+<!-- <div class="p-4 flex items-baseline"> -->
+<owl-carousel-o [options]="customOptions">
+
+    @for (cat of allCategories.data; track $index) {
+
+    <ng-template carouselSlide>
+        <div
+            class=" h-full  overflow-hidden my-6">
+            <img class="h-[300px] w-full object-cover  object-center"
+                [src]="cat.image" alt="blog">
+            <div class="p-6">
+                <h2
+                    class="tracking-widest text-xs title-font font-medium text-main-800 mb-1 text-center">{{cat.name}}</h2>
+            </div>
+        </div> </ng-template>
+    }
+
+</owl-carousel-o>
+<!-- </div> -->
+
+}
