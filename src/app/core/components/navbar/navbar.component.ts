@@ -11,17 +11,27 @@ import { isPlatformBrowser } from '@angular/common';
 export class NavbarComponent implements OnInit {
   _PLATFORM_ID = inject(PLATFORM_ID);
   router = inject(Router);
-
+  userImage!: string | null;
   token!: string | null;
-
+  userdata!: string | null;
+  username!: string | null;
+  useremail!: string | null;
   ngOnInit() {
     if (isPlatformBrowser(this._PLATFORM_ID)) {
       this.token = localStorage.getItem('token');
+      this.userImage = localStorage.getItem('userImage');
+      this.userdata = localStorage.getItem('userData');
+      this.username = this.userdata ? JSON.parse(this.userdata).name : null;
+      this.useremail = this.userdata ? JSON.parse(this.userdata).email : null;
     }
-  } 
-  ngDoCheck(){
+  }
+  ngDoCheck() {
     if (isPlatformBrowser(this._PLATFORM_ID)) {
       this.token = localStorage.getItem('token');
+      this.userImage = localStorage.getItem('userImage');
+      this.userdata = localStorage.getItem('userData');
+      this.username = this.userdata ? JSON.parse(this.userdata).name : null;
+      this.useremail = this.userdata ? JSON.parse(this.userdata).email : null;
     }
   }
 

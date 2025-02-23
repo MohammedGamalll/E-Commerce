@@ -19,3 +19,7 @@
 input.ng-invalid.ng-touched {
     @apply border-red-500 ring-1 ring-red-500
 }
+
+.nums-font {
+    font-family: 'Times New Roman', Times, serif !important;
+}

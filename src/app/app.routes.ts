@@ -18,7 +18,7 @@ import { ResetPasswordComponent } from './auth/pages/reset-password/reset-passwo
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'main/home',
     pathMatch: 'full',
   },
   {

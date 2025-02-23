@@ -17,6 +17,12 @@ import { Router, RouterLink } from '@angular/router';
 export class LoginComponent {
   fb = inject(FormBuilder);
   router = inject(Router);
+  userImages: string[] = [
+    '/images/user1.jpg',
+    '/images/user2.jpg',
+    '/images/user3.jpg',
+    '/images/user4.jpg',
+  ];
   loginService = inject(LoginService);
   myForm: FormGroup = this.fb.group({
     email: [null, [Validators.required]],
@@ -32,7 +38,12 @@ export class LoginComponent {
     this.failMessage = '';
     this.loginService.signIn(this.myForm.value).subscribe({
       next: (response) => {
-        console.log(response);
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('userData', JSON.stringify(response.user));
+        localStorage.setItem(
+          'userImage',
+          this.userImages[Math.floor(Math.random() * this.userImages.length)]
+        );
         this.successMessage = response.message;
         setTimeout(() => {
           this.router.navigate(['main/home']);
