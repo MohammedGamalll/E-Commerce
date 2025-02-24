@@ -25,7 +25,7 @@ export class HomeCategoriesComponent {
       next: (data) => {
         this.allCategories = data;
 
-        console.log(data);
+        console.log(data.data);
       },
       error: (err) => {
         console.log(err);

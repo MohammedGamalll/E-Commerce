@@ -20,6 +20,16 @@ input.ng-invalid.ng-touched {
     @apply border-red-500 ring-1 ring-red-500
 }
 
-.nums-font {
-    font-family: 'Times New Roman', Times, serif !important;
+*::selection {
+    background-color: #334d4d;
+    color: #fff;
+}
+
+.card {
+    @apply shadow-xl hover:transform hover:scale-105
+}
+
+.myTransition {
+    transition: all 0.5s;
+    transition-duration: 300ms;
 }

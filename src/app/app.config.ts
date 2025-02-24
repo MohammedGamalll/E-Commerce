@@ -13,6 +13,7 @@ import {
 } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { spinnerInterceptor } from './core/interceptors/spinner.interceptor';
+import { IMAGE_CONFIG } from '@angular/common';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,5 +22,12 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(withEventReplay()),
     provideHttpClient(withFetch(), withInterceptors([spinnerInterceptor])),
     provideAnimations(),
+    {
+      provide: IMAGE_CONFIG,
+      useValue: {
+        disableImageSizeWarning: true,
+        disableImageLazyLoadWarning: true,
+      },
+    },
   ],
 };

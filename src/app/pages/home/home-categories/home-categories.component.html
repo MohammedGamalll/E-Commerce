@@ -2,7 +2,7 @@
 <!-- <div class="p-4 flex items-baseline"> -->
 <owl-carousel-o [options]="customOptions">
 
-    @for (cat of allCategories.data; track $index) {
+    @for (cat of allCategories.data; track cat._id) {
 
     <ng-template carouselSlide>
         <div

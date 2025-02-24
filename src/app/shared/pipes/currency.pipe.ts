@@ -1,15 +1,14 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'currency',
+  name: 'egpCurrency',
 })
-export class CurrencyPipe implements PipeTransform {
+export class EgpCurrencyPipe implements PipeTransform {
   transform(
     value: string | number | null | undefined,
-    currencyCode: string = 'USD',
-    display: boolean = true,
+    display: 'code' | 'symbol' | 'symbol-narrow' = 'symbol', // Accepts string values
     digitsInfo: string = '1.2-2',
-    locale: string = 'en-US'
+    locale: string = 'en-EG' // Set locale to Egypt
   ): string | null {
     if (value == null) return null;
 
@@ -17,8 +16,9 @@ export class CurrencyPipe implements PipeTransform {
     let amount = Number(value);
     return new Intl.NumberFormat(locale, {
       style: 'currency',
-      currency: currencyCode,
-      minimumFractionDigits: display ? 2 : 0,
+      currency: 'EGP',
+      minimumFractionDigits: display === 'symbol' ? 2 : 0,
+      maximumFractionDigits: 2,
     }).format(amount);
   }
 }

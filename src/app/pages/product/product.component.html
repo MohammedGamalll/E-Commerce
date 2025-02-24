@@ -1,11 +1,13 @@
 @if (allProducts) {
-<div class="flex flex-wrap bg-main-000 justify-center">
-    @for (prod of allProducts.data; track $index) {
+<div class="flex flex-wrap bg-main-000 justify-center py-10">
+    @for (prod of allProducts.data; track prod.id) {
 
     <div
         class="w-1/4 max-w-sm p-4 bg-main-000">
-        <div class="inner  bg-white  rounded-2xl">
-            <a href="#" class="w-[250px]">
+        <div
+            class="inner bg-white  rounded-2xl card overflow-hidden group myTransition">
+            <a [routerLink]="['/main/details',prod._id]"
+                routerLinkActive="router-link-active" class="w-[250px]">
                 <img class="p-8 rounded-t-lg w-full h-72 object-cover"
                     [src]="prod.imageCover"
                     alt="product image" />
@@ -33,10 +35,11 @@
                 <div class="flex items-center justify-between mt-5">
                     <span
                         class="text-xl nums-font">{{prod.price |
-                        currency: 'EGP' : true}}</span>
-                    <a href="#"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add
-                        to cart</a>
+                        currency: 'EGP ' : true}}</span>
+                    <button
+                        class="cart btn-main px-7 py-2 translate-y-[200%] group-hover:translate-y-[0] duration-300 cursor-pointer myTransition">
+                        Add To Cart
+                    </button>
                 </div>
             </div>
         </div>

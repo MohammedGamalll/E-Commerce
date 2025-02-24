@@ -1,15 +1,16 @@
 import { Component, inject } from '@angular/core';
 import { CategoriesService } from '../../core/services/categories/categories.service';
 import { ICategory } from '../../core/interfaces/categories/icategory';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-categories',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './categories.component.html',
-  styleUrl: './categories.component.css'
+  styleUrl: './categories.component.css',
 })
 export class CategoriesComponent {
-categoriesService = inject(CategoriesService);
+  categoriesService = inject(CategoriesService);
   allCategories!: ICategory;
   constructor() {}
 
@@ -22,7 +23,7 @@ categoriesService = inject(CategoriesService);
       next: (data) => {
         this.allCategories = data;
 
-        console.log(data);
+        console.log(this.allCategories);
       },
       error: (err) => {
         console.log(err);
