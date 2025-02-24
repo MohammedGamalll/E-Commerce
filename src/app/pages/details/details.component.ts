@@ -4,6 +4,8 @@ import { SpecificProductService } from '../../core/services/products/specific-pr
 import { IproductDetails } from '../../core/interfaces/products/iproduct-details';
 import { CurrencyPipe } from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
+import { CartService } from '../../core/services/cart.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-details',
@@ -16,6 +18,8 @@ export class DetailsComponent implements OnInit {
   specificProductService = inject(SpecificProductService);
   title = inject(Title);
   meta = inject(Meta);
+  cartService = inject(CartService);
+  toaster = inject(ToastrService);
   prodID!: string;
   productDetails!: IproductDetails;
 
@@ -66,5 +70,14 @@ export class DetailsComponent implements OnInit {
 
   addToCart(Pid: string) {
     console.log(Pid, 'Added to cart');
+    this.cartService.addProductToCart(Pid).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.toaster.success('Added To Cart Successfully', 'Success !');
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
   }
 }
