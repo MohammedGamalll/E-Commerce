@@ -3,7 +3,7 @@
     @for (prod of allProducts.data; track prod.id) {
 
     <div
-        class="w-1/4 max-w-sm p-4 bg-main-000">
+        class="xl:w-1/4 lg:w-1/3  md:w-1/2 w-full md:m-0 mx-4 p-4 bg-main-000">
         <div
             class="inner bg-white  rounded-2xl card overflow-hidden group myTransition">
             <a [routerLink]="['/main/details',prod._id]"
@@ -37,7 +37,7 @@
                         class="text-xl nums-font">{{prod.price |
                         currency: 'EGP ' : true}}</span>
                     <button
-                        class="cart btn-main px-7 py-2 translate-y-[200%] group-hover:translate-y-[0] duration-300 cursor-pointer myTransition">
+                        class="cart btn-main px-7 py-2 translate-y-[200%] group-hover:translate-y-[0] duration-300 cursor-pointer myTransition ">
                         Add To Cart
                     </button>
                 </div>

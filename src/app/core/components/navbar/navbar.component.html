@@ -5,15 +5,15 @@
         class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-4">
         <a routerLink="main/home"
             class="flex items-center space-x-3 rtl:space-x-reverse ">
-            <img src="/Preview.png" class="w-[120px]"
+            <img src="/Preview.png" class="w-[110px]"
                 alt="Flowbite Logo" />
 
         </a>
         <div
-            class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+            class="flex items-center md:order-2 space-x-5 md:space-x-0 rtl:space-x-reverse">
 
             <button data-collapse-toggle="navbar-default" type="button"
-                class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-main-600 rounded-lg md:hidden hover:bg-main-800 hover:text-main-000 focus:ring-2 focus:ring-main-800 focus:outline-none  "
                 aria-controls="navbar-default" aria-expanded="false">
                 <span class="sr-only">Open main menu</span>
                 <svg class="w-5 h-5" aria-hidden="true"
@@ -61,7 +61,7 @@
                     <li>
 
                         <button (click)="logout()"
-                            class="block px-4 py-2 text-sm text-main-800 hover:bg-main-800 hover:text-main-100 transition-colors  w-full text-left">Sign
+                            class="block px-4 py-2 text-sm text-main-800 hover:bg-main-800 hover:text-main-100 transition-colors  w-full text-left cursor-pointer">Sign
                             Out</button>
                     </li>
                 </ul>
@@ -73,31 +73,31 @@
             <div class="md:flex md:justify-between md:mx-4 text-main-800 ">
                 <ul
                     class="font-medium flex flex-col p-4 md:p-0 mt-4 borderrounded-lg  md:flex-row md:space-x-6 rtl:space-x-reverse md:mt-0 md:border-0 capitalize">
-                    <li class="mt-2 md:mx-4">
+                    <li class="mt-2 md:mx-3">
                         <a routerLink="main/home"
                             routerLinkActive="!bg-main-600 !text-white transition-colors"
                             class="!p-1  rounded-md md:bg-transparent  md:p-0 "
                             aria-current="page">Home</a>
                     </li>
-                    <li class="mt-2 md:mx-4">
+                    <li class="mt-2 md:mx-3">
                         <a routerLink="main/cart"
                             routerLinkActive="!bg-main-600 !text-white transition-colors"
                             class="!p-1  rounded-md md:bg-transparent  md:p-0 "
                             aria-current="page">cart</a>
                     </li>
-                    <li class="mt-2 md:mx-4">
+                    <li class="mt-2 md:mx-3">
                         <a routerLink="main/categories"
                             routerLinkActive="!bg-main-600 !text-white transition-colors"
                             class="!p-1  rounded-md md:bg-transparent  md:p-0 "
                             aria-current="page">categories</a>
                     </li>
-                    <li class="mt-2 md:mx-4">
+                    <li class="mt-2 md:mx-3">
                         <a routerLink="main/products"
                             routerLinkActive="!bg-main-600 !text-white transition-colors"
                             class="!p-1  rounded-md md:bg-transparent  md:p-0 "
                             aria-current="page">products</a>
                     </li>
-                    <li class="mt-2 md:mx-4">
+                    <li class="mt-2 md:mx-3">
                         <a routerLink="main/brands"
                             routerLinkActive="!bg-main-600 !text-white transition-colors"
                             class="!p-1  rounded-md md:bg-transparent  md:p-0 "
@@ -109,14 +109,14 @@
                     <ul
                         class="font-medium flex flex-col p-4 md:p-0 mt-4 borderrounded-lg  md:flex-row md:space-x-4 rtl:space-x-reverse md:mt-0 md:border-0 capitalize">
                         @if(!token){
-                        <li class="mt-2 md:mx-4">
+                        <li class="mt-2 md:mx-3">
 
                             <a routerLink="register"
                                 routerLinkActive="!bg-main-600 !text-white transition-colors"
                                 class="!p-1  rounded-md md:bg-transparent  md:p-0 "
                                 aria-current="page">Sign Up</a>
                         </li>
-                        <li class="mt-2 md:mx-4">
+                        <li class="mt-2 md:mx-3">
                             <a routerLink="login"
                                 routerLinkActive="!bg-main-600 !text-white transition-colors"
                                 class="!p-1  rounded-md md:bg-transparent  md:p-0 "
