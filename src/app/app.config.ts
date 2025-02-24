@@ -1,5 +1,10 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import {
+  provideRouter,
+  withHashLocation,
+  withInMemoryScrolling,
+  withViewTransitions,
+} from '@angular/router';
 
 import { routes } from './app.routes';
 import {
@@ -18,7 +23,12 @@ import { IMAGE_CONFIG } from '@angular/common';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
+    provideRouter(
+      routes,
+      withHashLocation(),
+      withViewTransitions(),
+      withInMemoryScrolling({ scrollPositionRestoration: 'enabled' })
+    ),
     provideClientHydration(withEventReplay()),
     provideHttpClient(withFetch(), withInterceptors([spinnerInterceptor])),
     provideAnimations(),
