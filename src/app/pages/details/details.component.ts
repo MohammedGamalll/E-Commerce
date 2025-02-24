@@ -32,9 +32,7 @@ export class DetailsComponent implements OnInit {
   getSpecificProduct() {
     this.specificProductService.getspecificProduct(this.prodID).subscribe({
       next: (product) => {
-        console.log(product);
         this.productDetails = product;
-        console.log(product.data.reviews);
         this.title.setTitle(product.data.title);
         this.meta.addTags([
           {
