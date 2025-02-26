@@ -29,4 +29,10 @@ export class CartService {
       count
     );
   }
+
+  clearCart(): Observable<{ message: string }> {
+    return this.httpClient.delete<{ message: string }>(
+      'https://ecommerce.routemisr.com/api/v1/cart'
+    );
+  }
 }
