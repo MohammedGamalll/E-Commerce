@@ -1,7 +1,15 @@
 import { CartService } from './../../services/cart.service';
-import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  inject,
+  OnInit,
+  PLATFORM_ID,
+} from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AsyncPipe, isPlatformBrowser } from '@angular/common';
+import { initFlowbite } from 'flowbite';
+import { FlowbiteService } from '../../services/flowbite/flowbite.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,6 +21,7 @@ export class NavbarComponent implements OnInit {
   _PLATFORM_ID = inject(PLATFORM_ID);
   router = inject(Router);
   cartService = inject(CartService);
+  flowbiteService = inject(FlowbiteService);
   userImage!: string | null;
   token!: string | null;
   userdata!: string | null;
@@ -26,14 +35,9 @@ export class NavbarComponent implements OnInit {
       this.username = this.userdata ? JSON.parse(this.userdata).name : null;
       this.useremail = this.userdata ? JSON.parse(this.userdata).email : null;
     }
-    this.cartService.getCart().subscribe({
-      next: (cart) => {
-        this.cartService.countCartItems.next(cart.numOfCartItems);
-      },
-      error: (error) => {
-        console.log(error);
-      },
-    });
+    if (this.token) {
+      this.getCart();
+    }
   }
   ngDoCheck() {
     if (isPlatformBrowser(this._PLATFORM_ID)) {
@@ -43,6 +47,20 @@ export class NavbarComponent implements OnInit {
       this.username = this.userdata ? JSON.parse(this.userdata).name : null;
       this.useremail = this.userdata ? JSON.parse(this.userdata).email : null;
     }
+  }
+
+  // ngAfterViewInit(): void {
+  //   initFlowbite();
+  // }
+  getCart(): void {
+    this.cartService.getCart().subscribe({
+      next: (cart) => {
+        this.cartService.countCartItems.next(cart.numOfCartItems);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
   }
 
   logout() {

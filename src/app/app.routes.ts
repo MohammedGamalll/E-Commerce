@@ -14,16 +14,19 @@ import { ForgetPasswordComponent } from './auth/pages/forget-password/forget-pas
 import { verify } from 'crypto';
 import { VerifyResetCodeComponent } from './auth/pages/verify-reset-code/verify-reset-code.component';
 import { ResetPasswordComponent } from './auth/pages/reset-password/reset-password.component';
+import { authGuard } from './core/guard/auth.guard';
+import { homeGuard } from './core/guard/home.guard';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'main/home',
+    redirectTo: '/login',
     pathMatch: 'full',
   },
   {
     path: '',
     component: AuthLayoutComponent,
+    canActivate: [homeGuard],
     children: [
       { path: 'login', component: LoginComponent, title: 'Sign In' },
       { path: 'register', component: RegisterComponent, title: 'Sign Up' },
@@ -47,6 +50,7 @@ export const routes: Routes = [
   {
     path: 'main',
     component: MainLayoutComponent,
+    canActivate: [authGuard],
     children: [
       { path: 'home', component: HomeComponent, title: 'Fast-Cart Home' },
       {

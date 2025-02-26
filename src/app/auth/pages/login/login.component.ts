@@ -33,7 +33,6 @@ export class LoginComponent {
   failMessage = '';
 
   onSubmit() {
-    console.log(this.myForm.value);
     this.successMessage = '';
     this.failMessage = '';
     this.loginService.signIn(this.myForm.value).subscribe({

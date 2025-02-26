@@ -27,12 +27,10 @@ export class ResetPasswordComponent {
   failMessage = '';
 
   onSubmit() {
-    console.log(this.myForm.value);
     this.successMessage = '';
     this.failMessage = '';
     this.resetPasswordService.resetPassword(this.myForm.value).subscribe({
       next: (response) => {
-        console.log(response);
         this.successMessage = 'Password reset successfully';
         this.token = response.token;
         // localStorage.setItem('token', this.token);

@@ -35,9 +35,7 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
-      console.log(params);
       this.prodID = params['id'];
-      console.log(this.prodID);
     });
 
     this.getSpecificProduct();
@@ -80,10 +78,8 @@ export class DetailsComponent implements OnInit {
   }
 
   addToCart(Pid: string) {
-    console.log(Pid, 'Added to cart');
     this.cartService.addProductToCart(Pid).subscribe({
       next: (response) => {
-        console.log(response);
         this.cartService.countCartItems.next(response.numOfCartItems);
         this.toaster.success('Added To Cart Successfully', 'Success !');
       },
@@ -133,7 +129,6 @@ export class DetailsComponent implements OnInit {
     let element = this.popup.nativeElement as HTMLElement;
     element.classList.remove('hidden');
     element.classList.add('imagePopup');
-    console.log(element);
   }
   closePopup() {
     let element = this.popup.nativeElement as HTMLElement;

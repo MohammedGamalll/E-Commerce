@@ -4,6 +4,7 @@ import { NavbarComponent } from './core/components/navbar/navbar.component';
 import { FooterComponent } from './core/components/footer/footer.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { initFlowbite } from 'flowbite';
 
 @Component({
   selector: 'app-root',
@@ -13,4 +14,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class AppComponent {
   title = 'E-Commerce';
+  // ngAfterViewInit(): void {
+  //   initFlowbite();
+  // }
 }

@@ -24,8 +24,6 @@ export class HomeCategoriesComponent {
     this.categoriesService.getAllCategories().subscribe({
       next: (data) => {
         this.allCategories = data;
-
-        console.log(data.data);
       },
       error: (err) => {
         console.log(err);

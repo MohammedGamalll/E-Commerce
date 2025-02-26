@@ -28,12 +28,10 @@ export class VerifyResetCodeComponent {
   failMessage = '';
 
   onSubmit() {
-    console.log(this.myForm.value);
     this.successMessage = '';
     this.failMessage = '';
     this.resetPasswordService.VerifyResetCode(this.myForm.value).subscribe({
       next: (response) => {
-        console.log(response);
         this.successMessage = response.status;
         setTimeout(() => {
           this.router.navigate(['resetPassword']);

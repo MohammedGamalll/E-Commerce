@@ -25,7 +25,6 @@ export class ProductComponent {
   getAllProducts() {
     this.productsService.getAllProducts().subscribe({
       next: (products) => {
-        // console.log(products);
         this.allProducts = products;
       },
       error: (error) => {
@@ -36,7 +35,6 @@ export class ProductComponent {
   addToCart(Pid: string) {
     this.cartService.addProductToCart(Pid).subscribe({
       next: (response) => {
-        console.log(response);
         this.cartService.countCartItems.next(response.numOfCartItems);
 
         this.toaster.success('Added To Cart Successfully', 'Success !');
