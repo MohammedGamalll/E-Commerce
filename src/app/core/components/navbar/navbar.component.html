@@ -80,12 +80,6 @@
                             aria-current="page">Home</a>
                     </li>
                     <li class="mt-2 md:mx-3">
-                        <a routerLink="main/cart"
-                            routerLinkActive="!bg-main-600 !text-white transition-colors"
-                            class="!p-1  rounded-md md:bg-transparent  md:p-0 "
-                            aria-current="page">cart</a>
-                    </li>
-                    <li class="mt-2 md:mx-3">
                         <a routerLink="main/categories"
                             routerLinkActive="!bg-main-600 !text-white transition-colors"
                             class="!p-1  rounded-md md:bg-transparent  md:p-0 "
@@ -121,6 +115,20 @@
                                 routerLinkActive="!bg-main-600 !text-white transition-colors"
                                 class="!p-1  rounded-md md:bg-transparent  md:p-0 "
                                 aria-current="page">Sign In</a>
+                        </li>
+                        }
+                        @else {
+                        <li class="mt-2 md:mx-3">
+                            <a routerLink="main/cart"
+                                routerLinkActive="!bg-main-600 !text-white transition-colors"
+                                class="!p-1  rounded-md md:bg-transparent  md:p-0 relative"
+                                aria-current="page">
+                                <i class="fas fa-shopping-cart text-xl"></i>
+                                <div
+                                    class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-main-600 border-2 border-white rounded-full -top-3 -end-3 nums-font">{{cartService.countCartItems
+                                    | async }}</div>
+
+                            </a>
                         </li>
                         }
 

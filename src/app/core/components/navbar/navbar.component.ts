@@ -1,16 +1,18 @@
+import { CartService } from './../../services/cart.service';
 import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { isPlatformBrowser } from '@angular/common';
+import { AsyncPipe, isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, AsyncPipe],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })
 export class NavbarComponent implements OnInit {
   _PLATFORM_ID = inject(PLATFORM_ID);
   router = inject(Router);
+  cartService = inject(CartService);
   userImage!: string | null;
   token!: string | null;
   userdata!: string | null;
@@ -24,6 +26,15 @@ export class NavbarComponent implements OnInit {
       this.username = this.userdata ? JSON.parse(this.userdata).name : null;
       this.useremail = this.userdata ? JSON.parse(this.userdata).email : null;
     }
+    this.cartService.getCart().subscribe({
+      next: (cart) => {
+        console.log(cart);
+        this.cartService.countCartItems.next(cart.numOfCartItems);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
   }
   ngDoCheck() {
     if (isPlatformBrowser(this._PLATFORM_ID)) {

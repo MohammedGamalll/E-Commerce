@@ -5,9 +5,32 @@
         <div class="container px-5 py-24 mx-auto">
             <div class="lg:w-4/5 mx-auto flex flex-wrap">
                 @let p = productDetails.data;
-                <img [alt]="productDetails.data.slug"
-                    class="lg:w-1/2 w-full lg:h-[500px] h-64 object-contain object-center rounded"
-                    [src]="productDetails.data.imageCover">
+                <div class="lg:w-1/2 w-full">
+                    <div class="main-image ">
+                        <img
+                            (click)="openPopUp($event)"
+                            class="rounded-lg md:h-[480px] h-200px md:w-auto w-[60%] mx-auto"
+                            [src]="mainImage"
+                            [alt]="productDetails.data.slug" />
+                    </div>
+
+                    <owl-carousel-o [options]="customOptions">
+                        @for (image of p.images; track $index) {
+
+                        <ng-template carouselSlide>
+                            <img
+                                [src]="image"
+                                (click)="changeMainImage(image)"
+                                class="object-scale-down my-4 h-[200px] rounded-lg cursor-pointer"
+                                alt="gallery-image" />
+
+                        </ng-template>
+                        }
+
+                    </owl-carousel-o>
+
+                </div>
+
                 <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                     <h2
                         class="text-sm title-font text-gray-500 tracking-widest">{{p.brand.name}}</h2>
@@ -89,5 +112,18 @@
             </div>
         </div>
     </section>
+    <div
+        class="popup hidden"
+        id="popup" #popup>
+
+        <div class="popup-content">
+            <span class="close text-8xl m-5"
+                (click)="closePopup()">&times;</span>
+            <img class="object-scale-down md:w-[50%] w-[90%] h-full"
+                [src]="mainImage"
+                alt="popup-image"
+                #selectedImage />
+        </div>
+    </div>
 </div>
 }

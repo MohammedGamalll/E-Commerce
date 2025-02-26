@@ -36,7 +36,7 @@
                     <span
                         class="text-xl nums-font">{{prod.price |
                         currency: 'EGP ' : true}}</span>
-                    <button
+                    <button (click)="addToCart(prod._id)"
                         class="cart btn-main px-7 py-2 md:translate-y-[200%] md:group-hover:translate-y-[0] md:duration-300 cursor-pointer myTransition translate-y-[0%]">
                         Add To Cart
                     </button>

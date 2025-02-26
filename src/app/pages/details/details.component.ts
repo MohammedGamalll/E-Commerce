@@ -1,15 +1,23 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, inject, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { SpecificProductService } from '../../core/services/products/specific-product.service';
 import { IproductDetails } from '../../core/interfaces/products/iproduct-details';
 import { CurrencyPipe } from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
 import { CartService } from '../../core/services/cart.service';
 import { ToastrService } from 'ngx-toastr';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
   selector: 'app-details',
-  imports: [CurrencyPipe],
+  imports: [CurrencyPipe, CarouselModule],
   templateUrl: './details.component.html',
   styleUrl: './details.component.css',
 })
@@ -22,6 +30,8 @@ export class DetailsComponent implements OnInit {
   toaster = inject(ToastrService);
   prodID!: string;
   productDetails!: IproductDetails;
+  mainImage!: string;
+  selectedImage!: string;
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
@@ -61,6 +71,7 @@ export class DetailsComponent implements OnInit {
             content: product.data.createdAt,
           },
         ]);
+        this.mainImage = product.data.imageCover;
       },
       error: (error) => {
         console.log(error);
@@ -73,11 +84,60 @@ export class DetailsComponent implements OnInit {
     this.cartService.addProductToCart(Pid).subscribe({
       next: (response) => {
         console.log(response);
+        this.cartService.countCartItems.next(response.numOfCartItems);
         this.toaster.success('Added To Cart Successfully', 'Success !');
       },
       error: (error) => {
         console.log(error);
       },
     });
+  }
+
+  customOptions: OwlOptions = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: false,
+    navSpeed: 700,
+    autoplay: true,
+    autoplayTimeout: 2000,
+    autoplaySpeed: 1000,
+    navText: [
+      '<i class="fa-solid fa-arrow-left"></i>',
+      '<i class="fa-solid fa-arrow-right"></i>',
+    ],
+    responsive: {
+      0: {
+        items: 1,
+      },
+      400: {
+        items: 4,
+      },
+      740: {
+        items: 4,
+      },
+      940: {
+        items: 6,
+      },
+    },
+    nav: true,
+  };
+
+  changeMainImage(image: string) {
+    this.mainImage = image;
+  }
+  @ViewChild('popup') popup!: ElementRef;
+
+  openPopUp(event: any) {
+    let element = this.popup.nativeElement as HTMLElement;
+    element.classList.remove('hidden');
+    element.classList.add('imagePopup');
+    console.log(element);
+  }
+  closePopup() {
+    let element = this.popup.nativeElement as HTMLElement;
+    element.classList.add('hidden');
+    element.classList.remove('imagePopup');
   }
 }
