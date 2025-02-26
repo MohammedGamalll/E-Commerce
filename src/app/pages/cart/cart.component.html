@@ -1,4 +1,4 @@
-@if(cart){
+@if(cart.data.products.length) {
 <section class="bg-white py-8 antialiased md:py-16">
     <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
         <h2 class="text-xl font-semibold text-main-800 sm:text-2xl">
@@ -27,6 +27,7 @@
                                 class="flex items-center justify-between md:order-3 md:justify-end">
                                 <div class="flex items-center">
                                     <button
+                                        (click)="decrementQuantity(item.product._id, item.count)"
                                         type="button"
                                         class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-gray-300 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100">
                                         <svg
@@ -43,12 +44,13 @@
                                                 d="M1 1h16" />
                                         </svg>
                                     </button>
-                                    <input
-                                        type="text"
-                                        class="w-10 shrink-0 border-0 bg-transparent text-center text-sm font-medium text-main-800 focus:outline-none focus:ring-0"
-                                        placeholder
-                                        value={{item.count}} />
+
+                                    <div
+                                        class="w-8 h-8 flex items-center justify-center nums-font text-main-800">
+                                        <p>{{item.count}}</p>
+                                    </div>
                                     <button
+                                        (click)="incrementQuantity(item.product._id, item.count)"
                                         type="button"
                                         class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-gray-300 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100">
                                         <svg
@@ -65,10 +67,12 @@
                                                 d="M9 1v16M1 9h16" />
                                         </svg>
                                     </button>
+
                                 </div>
                                 <div class="text-end md:order-4 md:w-32">
                                     <p
-                                        class="text-base font-bold text-main-800">{{item.price}}</p>
+                                        class="text-base font-bold text-main-800 nums-font">{{item.price
+                                        | currency:' EGP '}}</p>
                                 </div>
                             </div>
 
@@ -101,6 +105,7 @@
                                     </button>
 
                                     <button
+                                        (click)="removeProductFromCart(item.product._id)"
                                         type="button"
                                         class="inline-flex items-center text-sm font-medium text-red-600 hover:underline">
                                         <svg
@@ -179,7 +184,7 @@
                             <dt
                                 class="text-base font-bold text-main-800">Total</dt>
                             <dd
-                                class="text-base font-bold text-main-800">{{cart.data.totalCartPrice
+                                class="text-base font-bold text-main-800 nums-font">{{cart.data.totalCartPrice
                                 - cart.data.totalCartPrice/3 + 49
                                 + cart.data.totalCartPrice*.2 | currency:' EGP '
                                 }}</dd>
@@ -196,4 +201,32 @@
     </div>
 </section>
 
+}
+@else {
+<section class="bg-white py-8 antialiased md:py-16">
+    <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
+        <h2 class="text-xl font-semibold text-main-800 sm:text-2xl">
+            Shopping Cart
+        </h2>
+
+        <div class="mt-6 sm:mt-8 md:gap-6 lg:flex lg:items-start xl:gap-8">
+            <div class="mx-auto w-full flex-none lg:max-w-2xl xl:max-w-4xl">
+                <div class="space-y-6">
+                    <div
+                        class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm md:p-6">
+                        <div
+                            class="space-y-4 md:flex md:items-center md:justify-between my-6 md:gap-6 md:space-y-0">
+                            <div
+                                class="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
+                                <p
+                                    class="text-base font-medium text-main-800 capitalize">Your
+                                    cart is empty :(</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 }

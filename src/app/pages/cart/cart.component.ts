@@ -30,4 +30,45 @@ export class CartComponent implements OnInit {
       },
     });
   }
+  incrementQuantity(productId: string, currentCount: number): void {
+    this.cartService
+      .updateCartItemQuantity({ count: ++currentCount }, productId)
+      .subscribe({
+        next: (cart: ICart) => {
+          this.cart = cart;
+          console.log(this.cart);
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
+  }
+
+  decrementQuantity(productId: string, currentCount: number): void {
+    this.cartService
+      .updateCartItemQuantity({ count: --currentCount }, productId)
+      .subscribe({
+        next: (cart: ICart) => {
+          this.cart = cart;
+          console.log(this.cart);
+          this.cartService.countCartItems.next(this.cart.data.products.length);
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
+  }
+
+  removeProductFromCart(productId: string): void {
+    this.cartService.updateCartItemQuantity({ count: 0 }, productId).subscribe({
+      next: (cart: ICart) => {
+        this.cart = cart;
+        console.log(this.cart);
+        this.cartService.countCartItems.next(this.cart.data.products.length);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
 }
