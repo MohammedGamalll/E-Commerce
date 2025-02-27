@@ -1,7 +1,7 @@
 export interface IProducts {
   results: number;
   metadata: Metadata;
-  data: Data[];
+  data: IProduct[];
 }
 
 export interface Metadata {
@@ -11,7 +11,7 @@ export interface Metadata {
   nextPage: number;
 }
 
-export interface Data {
+export interface IProduct {
   sold: number;
   images: string[];
   subcategory: Subcategory[];
