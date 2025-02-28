@@ -58,21 +58,44 @@ export class PaymentGatewayComponent implements OnInit {
 
     this.selecedPaymentMethod = selecedPaymentMethod;
     if (this.selecedPaymentMethod === 'online') {
-      this.onlinePyament();
+      this.onlinePayment();
     } else if (this.selecedPaymentMethod === 'cash') {
       this.cashOnDelivery();
     }
   }
 
-  onlinePyament() {
+  onlinePayment() {
     this.ordersService.onlinePayment(this.cartId, this.myForm.value).subscribe({
       next: (response: IOnlinePayment) => {
-        console.log(response);
+        console.log('API Response:', response);
+
+        // Validate the response structure
+        if (response && response.session && response.session.url) {
+          // Ensure the URL is a valid string
+          const url = response.session.url.toString().trim();
+
+          // Optionally sanitize the URL (if needed)
+          const sanitizedUrl = url.replace(/[^a-zA-Z0-9:/?&=.#]/g, '');
+
+          // Redirect to the payment session URL
+          window.location.assign(sanitizedUrl);
+        } else {
+          console.error(
+            'Invalid API response. Missing or incorrect session URL.'
+          );
+          alert(
+            'An error occurred while processing your payment. Please try again later.'
+          );
+        }
+
+        // Clear the cart count
         this.cartService.countCartItems.next(0);
-        window.open(response.session.url);
       },
       error: (error) => {
-        console.log(error);
+        console.error('Error during online payment:', error);
+        alert(
+          'An error occurred while processing your payment. Please try again later.'
+        );
       },
     });
   }

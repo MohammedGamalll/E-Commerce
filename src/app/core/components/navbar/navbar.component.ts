@@ -1,5 +1,6 @@
 import { CartService } from './../../services/cart.service';
 import {
+  afterNextRender,
   AfterViewInit,
   Component,
   inject,
@@ -27,6 +28,11 @@ export class NavbarComponent implements OnInit {
   userdata!: string | null;
   username!: string | null;
   useremail!: string | null;
+  constructor() {
+    afterNextRender(() => {
+      initFlowbite();
+    });
+  }
   ngOnInit() {
     if (isPlatformBrowser(this._PLATFORM_ID)) {
       this.token = localStorage.getItem('token');
@@ -49,9 +55,6 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  // ngAfterViewInit(): void {
-  //   initFlowbite();
-  // }
   getCart(): void {
     this.cartService.getCart().subscribe({
       next: (cart) => {

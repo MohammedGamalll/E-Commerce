@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { afterNextRender, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './core/components/navbar/navbar.component';
 import { FooterComponent } from './core/components/footer/footer.component';
@@ -17,4 +17,10 @@ export class AppComponent {
   // ngAfterViewInit(): void {
   //   initFlowbite();
   // }
+
+  constructor() {
+    afterNextRender(() => {
+      initFlowbite();
+    });
+  }
 }
