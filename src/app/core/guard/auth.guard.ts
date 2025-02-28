@@ -10,12 +10,11 @@ export const authGuard: CanActivateFn = (route, state) => {
   let token!: string | null;
   if (isPlatformBrowser(_PLATFORM_ID)) {
     token = localStorage.getItem('token');
-  }
-
-  if (!token) {
-    toastrService.error('You need to login first');
-    router.navigate(['/login']);
-    return false;
+    if (!token) {
+      toastrService.error('You need to login first');
+      router.navigate(['/login']);
+      return false;
+    }
   }
 
   return true;

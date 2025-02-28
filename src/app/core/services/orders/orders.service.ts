@@ -10,6 +10,7 @@ import { IOrders } from '../../interfaces/Orders/iorders';
 })
 export class OrdersService {
   constructor(private httpClient: HttpClient) {}
+  hash = '#';
 
   getOrders(id: string): Observable<IOrders> {
     return this.httpClient.get<IOrders>(
@@ -19,7 +20,7 @@ export class OrdersService {
 
   onlinePayment(cartId: string, details: {}): Observable<IOnlinePayment> {
     return this.httpClient.post<IOnlinePayment>(
-      `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=http://localhost:4200`,
+      `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=http://localhost:4200/&#35;`,
       { shippingAddress: details }
     );
   }

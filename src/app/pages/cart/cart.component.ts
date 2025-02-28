@@ -29,6 +29,7 @@ export class CartComponent implements OnInit {
     this.cartService.getCart().subscribe({
       next: (cart: ICart) => {
         this.cart = cart;
+        console.log(this.cart.cartId);
       },
       error: (error) => {
         console.log(error);

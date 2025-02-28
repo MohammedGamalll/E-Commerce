@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { OrdersService } from '../../core/services/orders/orders.service';
 import { IOnlinePayment } from '../../core/interfaces/payment/ionline-payment';
 import { IOrder } from '../../core/interfaces/Orders/iorder';
+import { CartService } from '../../core/services/cart.service';
 
 @Component({
   selector: 'app-payment-gateway',
@@ -20,6 +21,7 @@ import { IOrder } from '../../core/interfaces/Orders/iorder';
 export class PaymentGatewayComponent implements OnInit {
   fb = inject(FormBuilder);
   ordersService = inject(OrdersService);
+  cartService = inject(CartService);
   activatedRoute = inject(ActivatedRoute);
   router = inject(Router);
   cartId = '';
@@ -66,6 +68,7 @@ export class PaymentGatewayComponent implements OnInit {
     this.ordersService.onlinePayment(this.cartId, this.myForm.value).subscribe({
       next: (response: IOnlinePayment) => {
         console.log(response);
+        this.cartService.countCartItems.next(0);
         window.open(response.session.url);
       },
       error: (error) => {
@@ -80,6 +83,7 @@ export class PaymentGatewayComponent implements OnInit {
       .subscribe({
         next: (response: IOrder) => {
           console.log(response);
+          this.cartService.countCartItems.next(0);
           this.router.navigate(['/allorders']);
         },
         error: (error) => {
