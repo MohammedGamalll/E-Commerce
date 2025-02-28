@@ -37,6 +37,7 @@ export class LoginComponent {
     this.failMessage = '';
     this.loginService.signIn(this.myForm.value).subscribe({
       next: (response) => {
+        console.log(response);
         localStorage.setItem('token', response.token);
         localStorage.setItem('userData', JSON.stringify(response.user));
         localStorage.setItem(
@@ -45,7 +46,7 @@ export class LoginComponent {
         );
         this.successMessage = response.message;
         setTimeout(() => {
-          this.router.navigate(['main/home']);
+          this.router.navigate(['/home']);
         }, 1000);
       },
       error: (error) => {

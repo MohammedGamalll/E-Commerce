@@ -14,7 +14,7 @@
                         @for (item of cart.data.products; track $index) {
                         <div
                             class="space-y-4 md:flex md:items-center md:justify-between my-6 md:gap-6 md:space-y-0">
-                            <a [routerLink]="['/main/details',item.product._id]"
+                            <a [routerLink]="['/details',item.product._id]"
                                 class="shrink-0 md:order-1">
                                 <img
                                     class="h-20 w-20 block"
@@ -80,7 +80,7 @@
                             <div
                                 class="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
                                 <a
-                                    [routerLink]="['/main/details',item.product._id]"
+                                    [routerLink]="['/details',item.product._id]"
                                     class="text-base font-medium text-main-800 hover:underline">{{item.product.title}}</a>
 
                                 <div class="flex items-center gap-4">
@@ -221,7 +221,7 @@
                     </div>
 
                     <a
-                        href="#"
+                        [routerLink]="['/payment',cart.cartId]"
                         class="flex bg-main-500 w-full items-center justify-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300">Proceed
                         to Checkout</a>
                 </div>

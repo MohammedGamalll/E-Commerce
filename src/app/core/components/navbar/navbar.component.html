@@ -3,7 +3,7 @@
 <nav class="bg-main-000">
     <div
         class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-2 md:px-10">
-        <a routerLink="main/home"
+        <a routerLink="/home"
             class="flex items-center space-x-3 rtl:space-x-reverse ">
             <img src="/Preview.png" class="w-[110px]"
                 alt="Flowbite Logo" />
@@ -47,11 +47,12 @@
                 </div>
                 <ul class="py-2" aria-labelledby="user-menu-button">
                     <li>
-                        <a
-                            class="block px-4 py-2 text-sm text-main-800 hover:bg-main-800 hover:text-main-100 transition-colors ">Dashboard</a>
+                        <a routerLink="/allorders"
+                            class="block px-4 py-2 text-sm text-main-800 hover:bg-main-800 hover:text-main-100 transition-colors ">All
+                            Orders</a>
                     </li>
                     <li>
-                        <a
+                        <a 
                             class="block px-4 py-2 text-sm text-main-800 hover:bg-main-800 hover:text-main-100 transition-colors ">Settings</a>
                     </li>
                     <li>
@@ -74,25 +75,25 @@
                 <ul
                     class="font-medium flex flex-col p-4 md:p-0 mt-4 borderrounded-lg  md:flex-row md:space-x-6 rtl:space-x-reverse md:mt-0 md:border-0 capitalize">
                     <li class="mt-2 md:mx-3">
-                        <a routerLink="main/home"
+                        <a routerLink="/home"
                             routerLinkActive="!bg-main-600 !text-white transition-colors"
                             class="!p-1  rounded-md md:bg-transparent  md:p-0 "
                             aria-current="page">Home</a>
                     </li>
                     <li class="mt-2 md:mx-3">
-                        <a routerLink="main/categories"
+                        <a routerLink="/categories"
                             routerLinkActive="!bg-main-600 !text-white transition-colors"
                             class="!p-1  rounded-md md:bg-transparent  md:p-0 "
                             aria-current="page">categories</a>
                     </li>
                     <li class="mt-2 md:mx-3">
-                        <a routerLink="main/products"
+                        <a routerLink="/products"
                             routerLinkActive="!bg-main-600 !text-white transition-colors"
                             class="!p-1  rounded-md md:bg-transparent  md:p-0 "
                             aria-current="page">products</a>
                     </li>
                     <li class="mt-2 md:mx-3">
-                        <a routerLink="main/brands"
+                        <a routerLink="/brands"
                             routerLinkActive="!bg-main-600 !text-white transition-colors"
                             class="!p-1  rounded-md md:bg-transparent  md:p-0 "
                             aria-current="page">brands</a>
@@ -119,7 +120,7 @@
                         }
                         @else {
                         <li class="mt-2 md:mx-3">
-                            <a routerLink="main/cart"
+                            <a routerLink="/cart"
                                 routerLinkActive="!bg-main-600 !text-white transition-colors"
                                 class="!p-1  rounded-md md:bg-transparent  md:p-0 relative"
                                 aria-current="page">

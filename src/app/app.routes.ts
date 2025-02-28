@@ -16,6 +16,8 @@ import { VerifyResetCodeComponent } from './auth/pages/verify-reset-code/verify-
 import { ResetPasswordComponent } from './auth/pages/reset-password/reset-password.component';
 import { authGuard } from './core/guard/auth.guard';
 import { homeGuard } from './core/guard/home.guard';
+import { PaymentGatewayComponent } from './pages/payment-gateway/payment-gateway.component';
+import { AllOrdersComponent } from './pages/all-orders/all-orders.component';
 
 export const routes: Routes = [
   {
@@ -48,7 +50,7 @@ export const routes: Routes = [
     ],
   },
   {
-    path: 'main',
+    path: '',
     component: MainLayoutComponent,
     canActivate: [authGuard],
     children: [
@@ -69,6 +71,16 @@ export const routes: Routes = [
         component: DetailsComponent,
       },
       { path: 'cart', component: CartComponent, title: 'Fast-Cart Cart' },
+      {
+        path: 'payment/:id',
+        component: PaymentGatewayComponent,
+        title: 'Fast-Cart Payment',
+      },
+      {
+        path: 'allorders',
+        component: AllOrdersComponent,
+        title: 'Fast-Cart All Orders',
+      },
     ],
   },
   { path: '**', component: NotfoundComponent, title: 'Not Found' },

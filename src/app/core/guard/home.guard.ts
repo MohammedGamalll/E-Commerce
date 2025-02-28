@@ -5,13 +5,13 @@ import { CanActivateFn, Router } from '@angular/router';
 export const homeGuard: CanActivateFn = (route, state) => {
   const _PLATFORM_ID = inject(PLATFORM_ID);
   const router = inject(Router);
-  let token!: string | null;
+  let token!: string;
   if (isPlatformBrowser(_PLATFORM_ID)) {
-    token = localStorage.getItem('token');
+    token = localStorage.getItem('token') as string;
   }
 
   if (token) {
-    router.navigate(['/main/home']);
+    router.navigate(['/home']);
     return false;
   }
 
