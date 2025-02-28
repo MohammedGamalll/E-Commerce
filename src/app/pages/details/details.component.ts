@@ -1,3 +1,5 @@
+import { WishlistService } from './../../core/services/wishlist/wishlist.service';
+import { WishlistComponent } from './../wishlist/wishlist.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   Component,
@@ -8,22 +10,25 @@ import {
 } from '@angular/core';
 import { SpecificProductService } from '../../core/services/products/specific-product.service';
 import { IproductDetails } from '../../core/interfaces/products/iproduct-details';
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, NgClass } from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
 import { CartService } from '../../core/services/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { IWishlist } from '../../core/interfaces/wishlist/iwishlist';
+import { get } from 'http';
 
 @Component({
   selector: 'app-details',
-  imports: [CurrencyPipe, CarouselModule],
+  imports: [CurrencyPipe, CarouselModule, NgClass],
   templateUrl: './details.component.html',
   styleUrl: './details.component.css',
 })
 export class DetailsComponent implements OnInit {
   activatedRoute = inject(ActivatedRoute);
   specificProductService = inject(SpecificProductService);
+  wishlistService = inject(WishlistService);
   title = inject(Title);
   meta = inject(Meta);
   cartService = inject(CartService);
@@ -32,13 +37,31 @@ export class DetailsComponent implements OnInit {
   productDetails!: IproductDetails;
   mainImage!: string;
   selectedImage!: string;
+  isClicked = false;
+  wishlist!: IWishlist;
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
       this.prodID = params['id'];
+      console.log(this.prodID);
     });
 
     this.getSpecificProduct();
+    this.getWishlist();
+  }
+
+  getWishlist() {
+    this.wishlistService.getWishlist().subscribe({
+      next: (response) => {
+        this.wishlist = response;
+        if (this.wishlist.data.some((item) => item._id === this.prodID)) {
+          this.isClicked = true;
+        }
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
   }
 
   getSpecificProduct() {
@@ -87,6 +110,40 @@ export class DetailsComponent implements OnInit {
         console.log(error);
       },
     });
+  }
+
+  addToWishlist(Pid: string) {
+    this.wishlistService.addToWishlist(Pid).subscribe({
+      next: (response) => {
+        this.toaster.success('Added To Wishlist Successfully', 'Success !');
+      },
+      error: (error) => {
+        this.toaster.error('Error Adding To Wishlist', 'Error !');
+        console.log(error);
+      },
+    });
+  }
+
+  removeFromWishlist(Pid: string) {
+    this.wishlistService.removeFromWishlist(Pid).subscribe({
+      next: (response) => {
+        this.toaster.success('Removed From Wishlist Successfully', 'Success !');
+      },
+      error: (error) => {
+        this.toaster.error('Error Removing From Wishlist', 'Error !');
+        console.log(error);
+      },
+    });
+  }
+
+  wishListBtn(Pid: string) {
+    if (this.isClicked) {
+      this.removeFromWishlist(Pid);
+      this.isClicked = false;
+    } else if (!this.isClicked) {
+      this.addToWishlist(Pid);
+      this.isClicked = true;
+    }
   }
 
   customOptions: OwlOptions = {

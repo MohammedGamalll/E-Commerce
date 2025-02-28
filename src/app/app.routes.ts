@@ -18,6 +18,7 @@ import { authGuard } from './core/guard/auth.guard';
 import { homeGuard } from './core/guard/home.guard';
 import { PaymentGatewayComponent } from './pages/payment-gateway/payment-gateway.component';
 import { AllOrdersComponent } from './pages/all-orders/all-orders.component';
+import { WishlistComponent } from './pages/wishlist/wishlist.component';
 
 export const routes: Routes = [
   {
@@ -80,6 +81,11 @@ export const routes: Routes = [
         path: 'allorders',
         component: AllOrdersComponent,
         title: 'Fast-Cart All Orders',
+      },
+      {
+        path: 'wishlist',
+        component: WishlistComponent,
+        title: 'Fast-Cart Wishlist',
       },
     ],
   },
