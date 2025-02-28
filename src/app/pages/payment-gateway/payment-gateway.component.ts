@@ -69,16 +69,10 @@ export class PaymentGatewayComponent implements OnInit {
       next: (response: IOnlinePayment) => {
         console.log('API Response:', response);
 
-        // Validate the response structure
         if (response && response.session && response.session.url) {
-          // Ensure the URL is a valid string
-          const url = response.session.url.toString().trim();
+          const url = response.session.url.toString();
 
-          // Optionally sanitize the URL (if needed)
-          const sanitizedUrl = url.replace(/[^a-zA-Z0-9:/?&=.#]/g, '');
-
-          // Redirect to the payment session URL
-          window.location.assign(sanitizedUrl);
+          window.location.assign(url);
         } else {
           console.error(
             'Invalid API response. Missing or incorrect session URL.'
