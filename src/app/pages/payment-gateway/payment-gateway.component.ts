@@ -82,7 +82,6 @@ export class PaymentGatewayComponent implements OnInit {
           );
         }
 
-        // Clear the cart count
         this.cartService.countCartItems.next(0);
       },
       error: (error) => {
