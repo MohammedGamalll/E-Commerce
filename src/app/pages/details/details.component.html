@@ -1,6 +1,6 @@
 
 @if(productDetails){
-<div class="container">
+<div class="container mt-[170px]">
     <section class="text-gray-600 body-font overflow-hidden capitalize">
         <div class="container px-5 py-24 mx-auto">
             <div class="lg:w-4/5 mx-auto flex flex-wrap">
@@ -99,7 +99,7 @@
                             <svg fill="currentColor" stroke-linecap="round"
                                 stroke-linejoin="round" stroke-width="2"
                                 class="w-5 h-5" viewBox="0 0 24 24 "
-                                [ngClass]="{'text-red-500': isClicked}">
+                                [ngClass]="{'text-red-500': p.inWishlist}">
                                 <path
                                     d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
                             </svg>

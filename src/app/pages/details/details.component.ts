@@ -50,20 +50,6 @@ export class DetailsComponent implements OnInit {
     this.getWishlist();
   }
 
-  getWishlist() {
-    this.wishlistService.getWishlist().subscribe({
-      next: (response) => {
-        this.wishlist = response;
-        if (this.wishlist.data.some((item) => item._id === this.prodID)) {
-          this.isClicked = true;
-        }
-      },
-      error: (error) => {
-        console.log(error);
-      },
-    });
-  }
-
   getSpecificProduct() {
     this.specificProductService.getspecificProduct(this.prodID).subscribe({
       next: (product) => {
@@ -112,6 +98,20 @@ export class DetailsComponent implements OnInit {
     });
   }
 
+  getWishlist() {
+    this.wishlistService.getWishlist().subscribe({
+      next: (response) => {
+        this.wishlist = response;
+        if (this.wishlist.data.some((item) => item._id === this.prodID)) {
+          this.productDetails.data.inWishlist = true;
+        }
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
+
   addToWishlist(Pid: string) {
     this.wishlistService.addToWishlist(Pid).subscribe({
       next: (response) => {
@@ -137,12 +137,12 @@ export class DetailsComponent implements OnInit {
   }
 
   wishListBtn(Pid: string) {
-    if (this.isClicked) {
+    if (this.productDetails.data.inWishlist) {
       this.removeFromWishlist(Pid);
-      this.isClicked = false;
-    } else if (!this.isClicked) {
+      this.productDetails.data.inWishlist = false;
+    } else if (!this.productDetails.data.inWishlist) {
       this.addToWishlist(Pid);
-      this.isClicked = true;
+      this.productDetails.data.inWishlist = true;
     }
   }
 
@@ -162,7 +162,7 @@ export class DetailsComponent implements OnInit {
     ],
     responsive: {
       0: {
-        items: 1,
+        items: 3,
       },
       400: {
         items: 4,

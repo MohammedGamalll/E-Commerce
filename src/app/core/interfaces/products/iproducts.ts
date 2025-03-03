@@ -31,6 +31,7 @@ export interface IProduct {
   id: string;
   priceAfterDiscount?: number;
   availableColors?: any[];
+  inWislist?: boolean | undefined;
 }
 
 export interface Subcategory {

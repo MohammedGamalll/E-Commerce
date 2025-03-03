@@ -1,4 +1,5 @@
-<div class="w-full my-8 flex items-center justify-center ">
+<div
+    class="w-full my-8 flex items-center justify-center container mt-[170px] py-24">
     <form [formGroup]="myForm" (ngSubmit)="onSubmit()"
         class="w-full md:w-2/3 rounded-lg">
         <h2 class="text-2xl text-center text-main-800 mb-8">Forget Password</h2>
@@ -7,7 +8,8 @@
             <div class="w-full mb-2 relative">
                 @let resetCode = myForm.get('resetCode');
 
-                <input type="password" id="resetCode" formControlName="resetCode"
+                <input type="password" id="resetCode"
+                    formControlName="resetCode"
                     class="text-black block px-2.5 pb-2.5 pt-4 w-full text-sm bg-transparent rounded-lg border-1 border-main-200 appearance-none focus:outline-none focus:ring-1 focus:ring-main-300 peer"
                     placeholder />
                 <label for="resetCode"
@@ -42,7 +44,7 @@
             <!-- Login Button -->
             <button
                 [disabled]="myForm.invalid || myForm.pristine"
-                class="
+                class="cursor-pointer
               w-full
               py-2
               mt-8

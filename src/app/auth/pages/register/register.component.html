@@ -1,4 +1,4 @@
- <div class="w-full my-8 flex items-center justify-center ">
+<div class="w-full flex items-center justify-center container mt-[170px] py-24">
     <form [formGroup]="myForm" (ngSubmit)="onSubmit()"
         class="w-full md:w-2/3 rounded-lg">
         <h2 class="text-2xl text-center text-main-800 mb-8">Register</h2>
@@ -226,6 +226,13 @@
             ">
                 Register
             </button>
+            <div>
+                <a routerLink="/login"
+                    class="text-main-800 text-center block mt-4 cursor-pointer">Already
+                    have
+                    Account ? </a>
+
+            </div>
 
             <!-- Success Message -->
             @if (successMessage) {

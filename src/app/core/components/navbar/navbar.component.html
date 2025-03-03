@@ -1,142 +1,150 @@
-
-<ng-content></ng-content>
-<nav class="bg-main-000">
-    <div
-        class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-2 md:px-10">
-        <a routerLink="/home"
-            class="flex items-center space-x-3 rtl:space-x-reverse ">
-            <img src="/Preview.png" class="w-[110px]"
-                alt="Flowbite Logo" />
-
-        </a>
+<div class=" fixed top-0 z-50 w-full shadow-sm">
+    <ng-content></ng-content>
+    <nav class="bg-main-000">
         <div
-            class="flex items-center !justify-center md:order-2 space-x-2 md:space-x-0 rtl:space-x-reverse">
+            class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-4 md:px-5">
+            <a routerLink="/home"
+                class="flex items-center space-x-3 rtl:space-x-reverse ">
+                <img src="/Preview.png" class="w-[110px]"
+                    alt="Flowbite Logo" />
 
-            <button data-collapse-toggle="navbar-default" type="button"
-                class="inline-flex items-center p-2 w-10 h-10 mx-1 justify-center text-sm text-main-600 rounded-lg md:hidden hover:bg-main-800 hover:text-main-000 focus:ring-2 focus:ring-main-800 focus:outline-none  "
-                aria-controls="navbar-default" aria-expanded="false">
-                <span class="sr-only">Open main menu</span>
-                <svg class="w-5 h-5" aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg" fill="none"
-                    viewBox="0 0 17 14">
-                    <path stroke="currentColor" stroke-linecap="round"
-                        stroke-linejoin="round" stroke-width="2"
-                        d="M1 1h15M1 7h15M1 13h15" />
-                </svg>
-            </button>
-            @if(token){
-            <button type="button"
-                class="flex text-sm  rounded-full md:me-0 focus:ring-2 focus:ring-gray-600"
-                id="user-menu-button" aria-expanded="false"
-                data-dropdown-toggle="user-dropdown"
-                data-dropdown-placement="bottom">
-                <span class="sr-only">Open user menu</span>
-                <img class="w-[70px] rounded-full"
-                    [src]="userImage"
-                    alt="user photo">
-            </button>
-            <!-- Dropdown menu -->
+            </a>
             <div
-                class="z-50 hidden my-4 text-base list-none  divide-y divide-gray-100 rounded-lg shadow-sm bg-main-000"
-                id="user-dropdown">
-                <div class="px-4 py-3">
-                    <span
-                        class="block text-sm text-main-800 ">{{username}}</span>
-                    <span
-                        class="block text-sm  text-main-600 truncate ">{{useremail}}</span>
-                </div>
-                <ul class="py-2" aria-labelledby="user-menu-button">
-                    <li>
-                        <a routerLink="/allorders"
-                            class="block px-4 py-2 text-sm text-main-800 hover:bg-main-800 hover:text-main-100 transition-colors ">All
-                            Orders</a>
-                    </li>
-                    <li>
-                        <a routerLink="/wishlist"
-                            class="block px-4 py-2 text-sm text-main-800 hover:bg-main-800 hover:text-main-100 transition-colors ">Wishlist</a>
-                    </li>
-                    <li>
-                        <a
-                            class="block px-4 py-2 text-sm text-main-800 hover:bg-main-800 hover:text-main-100 transition-colors ">Earnings</a>
-                    </li>
-                    <li>
+                class="flex items-center !justify-center md:order-2 space-x-2 md:space-x-0 rtl:space-x-reverse">
 
-                        <button (click)="logout()"
-                            class="block px-4 py-2 text-sm text-main-800 hover:bg-main-800 hover:text-main-100 transition-colors  w-full text-left cursor-pointer">Sign
-                            Out</button>
-                    </li>
-                </ul>
-            </div>
-            }
-        </div>
-        <div class="hidden w-full md:block md:w-auto flex-grow-1"
-            id="navbar-default">
-            <div class="md:flex md:justify-between md:mx-4 text-main-800 ">
-                <ul
-                    class="font-medium flex flex-col p-4 md:p-0 mt-4 borderrounded-lg  md:flex-row md:space-x-6 rtl:space-x-reverse md:mt-0 md:border-0 capitalize">
-                    <li class="mt-2 md:mx-3">
-                        <a routerLink="/home"
-                            routerLinkActive="!bg-main-600 !text-white transition-colors"
-                            class="!p-1  rounded-md md:bg-transparent  md:p-0 "
-                            aria-current="page">Home</a>
-                    </li>
-                    <li class="mt-2 md:mx-3">
-                        <a routerLink="/categories"
-                            routerLinkActive="!bg-main-600 !text-white transition-colors"
-                            class="!p-1  rounded-md md:bg-transparent  md:p-0 "
-                            aria-current="page">categories</a>
-                    </li>
-                    <li class="mt-2 md:mx-3">
-                        <a routerLink="/products"
-                            routerLinkActive="!bg-main-600 !text-white transition-colors"
-                            class="!p-1  rounded-md md:bg-transparent  md:p-0 "
-                            aria-current="page">products</a>
-                    </li>
-                    <li class="mt-2 md:mx-3">
-                        <a routerLink="/brands"
-                            routerLinkActive="!bg-main-600 !text-white transition-colors"
-                            class="!p-1  rounded-md md:bg-transparent  md:p-0 "
-                            aria-current="page">brands</a>
-                    </li>
-
-                </ul>
-                <div class="md:flex md:justify-between">
-                    <ul
-                        class="font-medium flex flex-col p-4 md:p-0 mt-4 borderrounded-lg  md:flex-row md:space-x-4 rtl:space-x-reverse md:mt-0 md:border-0 capitalize">
-                        @if(!token){
-                        <li class="mt-2 md:mx-3">
-
-                            <a routerLink="register"
-                                routerLinkActive="!bg-main-600 !text-white transition-colors"
-                                class="!p-1  rounded-md md:bg-transparent  md:p-0 "
-                                aria-current="page">Sign Up</a>
+                <button data-collapse-toggle="navbar-default" type="button"
+                    class="inline-flex items-center p-2 w-10 h-10 mx-1 justify-center text-sm text-main-600 rounded-lg md:hidden hover:bg-main-800 hover:text-main-000 focus:ring-2 focus:ring-main-800 focus:outline-none  "
+                    aria-controls="navbar-default" aria-expanded="false">
+                    <span class="sr-only">Open main menu</span>
+                    <svg class="w-5 h-5" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 17 14">
+                        <path stroke="currentColor" stroke-linecap="round"
+                            stroke-linejoin="round" stroke-width="2"
+                            d="M1 1h15M1 7h15M1 13h15" />
+                    </svg>
+                </button>
+                @if(token){
+                <button type="button"
+                    class="flex text-sm  rounded-full md:me-0 focus:ring-2 focus:ring-gray-600"
+                    id="user-menu-button" aria-expanded="false"
+                    data-dropdown-toggle="user-dropdown"
+                    data-dropdown-placement="bottom">
+                    <span class="sr-only">Open user menu</span>
+                    <img class="w-[70px] rounded-full"
+                        [src]="userImage"
+                        alt="user photo">
+                </button>
+                <!-- Dropdown menu -->
+                <div
+                    class="z-50 hidden my-4 text-base list-none  divide-y divide-gray-100 rounded-lg shadow-sm bg-main-000"
+                    id="user-dropdown">
+                    <div class="px-4 py-3">
+                        <span
+                            class="block text-sm text-main-800 ">{{username}}</span>
+                        <span
+                            class="block text-sm  text-main-600 truncate ">{{useremail}}</span>
+                    </div>
+                    <ul class="py-2" aria-labelledby="user-menu-button">
+                        <li>
+                            <a routerLink="/allorders"
+                                class="block px-4 py-2 text-sm text-main-800 hover:bg-main-800 hover:text-main-100 transition-colors ">All
+                                Orders</a>
                         </li>
-                        <li class="mt-2 md:mx-3">
-                            <a routerLink="login"
-                                routerLinkActive="!bg-main-600 !text-white transition-colors"
-                                class="!p-1  rounded-md md:bg-transparent  md:p-0 "
-                                aria-current="page">Sign In</a>
+                        <li>
+                            <a routerLink="/wishlist"
+                                class="block px-4 py-2 text-sm text-main-800 hover:bg-main-800 hover:text-main-100 transition-colors ">Wishlist</a>
                         </li>
-                        }
-                        @else {
-                        <li class="mt-2 md:mx-3">
-                            <a routerLink="/cart"
-                                routerLinkActive="!bg-main-600 !text-white transition-colors"
-                                class="!p-1  rounded-md md:bg-transparent  md:p-0 relative"
-                                aria-current="page">
-                                <i class="fas fa-shopping-cart text-xl"></i>
-                                <div
-                                    class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-main-600 border-2 border-white rounded-full -top-3 -end-3 nums-font">{{cartService.countCartItems
-                                    | async }}</div>
-
-                            </a>
+                        <li>
+                            <a
+                                class="block px-4 py-2 text-sm text-main-800 hover:bg-main-800 hover:text-main-100 transition-colors ">Earnings</a>
                         </li>
-                        }
+                        <li>
 
+                            <button (click)="logout()"
+                                class="block px-4 py-2 text-sm text-main-800 hover:bg-main-800 hover:text-main-100 transition-colors  w-full text-left cursor-pointer">Sign
+                                Out</button>
+                        </li>
                     </ul>
                 </div>
+                }
+            </div>
+            <div class="hidden w-full md:block md:w-auto flex-grow-1"
+                id="navbar-default">
+                <div class="md:flex md:justify-between md:mx-4 text-main-800 ">
+                    <ul
+                        class="font-medium flex flex-col p-4 md:p-0 mt-4 borderrounded-lg  md:flex-row md:space-x-6 rtl:space-x-reverse md:mt-0 md:border-0 capitalize">
+                        <li class="mt-2 md:mx-3">
+                            <a routerLink="/home"
+                                routerLinkActive="!bg-main-600 !text-white transition-colors"
+                                class="!p-1  rounded-md md:bg-transparent  md:p-0 "
+                                aria-current="page">Home</a>
+                        </li>
+                        <li class="mt-2 md:mx-3">
+                            <a routerLink="/categories"
+                                routerLinkActive="!bg-main-600 !text-white transition-colors"
+                                class="!p-1  rounded-md md:bg-transparent  md:p-0 "
+                                aria-current="page">categories</a>
+                        </li>
+                        <li class="mt-2 md:mx-3">
+                            <a routerLink="/products"
+                                routerLinkActive="!bg-main-600 !text-white transition-colors"
+                                class="!p-1  rounded-md md:bg-transparent  md:p-0 "
+                                aria-current="page">products</a>
+                        </li>
+                        <li class="mt-2 md:mx-3">
+                            <a routerLink="/wishlist"
+                                routerLinkActive="!bg-main-600 !text-white transition-colors"
+                                class="!p-1  rounded-md md:bg-transparent  md:p-0 "
+                                aria-current="page">Wishlist</a>
+                        </li>
 
+                        <li class="mt-2 md:mx-3">
+                            <a routerLink="/brands"
+                                routerLinkActive="!bg-main-600 !text-white transition-colors"
+                                class="!p-1  rounded-md md:bg-transparent  md:p-0 "
+                                aria-current="page">brands</a>
+                        </li>
+
+                    </ul>
+                    <div class="md:flex md:justify-between">
+                        <ul
+                            class="font-medium flex flex-col p-4 md:p-0 mt-4 borderrounded-lg  md:flex-row md:space-x-4 rtl:space-x-reverse md:mt-0 md:border-0 capitalize">
+                            @if(!token){
+                            <li class="mt-2 md:mx-3">
+
+                                <a routerLink="register"
+                                    routerLinkActive="!bg-main-600 !text-white transition-colors"
+                                    class="!p-1  rounded-md md:bg-transparent  md:p-0 "
+                                    aria-current="page">Sign Up</a>
+                            </li>
+                            <li class="mt-2 md:mx-3">
+                                <a routerLink="login"
+                                    routerLinkActive="!bg-main-600 !text-white transition-colors"
+                                    class="!p-1  rounded-md md:bg-transparent  md:p-0 "
+                                    aria-current="page">Sign In</a>
+                            </li>
+                            }
+                            @else {
+                            <li class="mt-2 md:mx-3">
+                                <a routerLink="/cart"
+                                    routerLinkActive="!bg-main-600 !text-white transition-colors"
+                                    class="!p-1  rounded-md md:bg-transparent  md:p-0 relative"
+                                    aria-current="page">
+                                    <i class="fas fa-shopping-cart text-xl"></i>
+                                    <div
+                                        class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-main-600 border-2 border-white rounded-full -top-3 -end-3 nums-font">{{cartService.countCartItems
+                                        | async }}</div>
+
+                                </a>
+                            </li>
+                            }
+
+                        </ul>
+                    </div>
+
+                </div>
             </div>
         </div>
-    </div>
-</nav>
+    </nav>
+</div>

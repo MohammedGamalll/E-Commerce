@@ -22,6 +22,7 @@ export interface Data {
   __v: number;
   reviews: any[];
   id: string;
+  inWishlist: boolean;
 }
 
 export interface Subcategory {

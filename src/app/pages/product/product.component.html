@@ -1,5 +1,5 @@
 @if (allProducts) {
-<div class="bg-main-000">
+<div class="bg-main-000 container md:pt-[170px] pt-[200px] ">
     <div class="w-2/3 mx-auto pt-10">
         <div class="w-full mb-2 relative">
             <input
@@ -38,26 +38,41 @@
                     <h2 class="text-gray-500 text-sm my-3 line-clamp-2">
                         {{prod.description}}
                     </h2>
-                    <div class="flex items-center justify-end mt-2.5 mb-5">
-                        <div
-                            class="flex items-center space-x-1 rtl:space-x-reverse">
-                            <svg class="w-4 h-4 text-yellow-300"
-                                aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="currentColor"
-                                viewBox="0 0 22 20">
-                                <path
-                                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                            </svg>
+                    <div class="flex items-center justify-between mt-2.5 mb-5">
+                        <div class="flex items-center justify-center">
+                            <div
+                                class="flex items-center space-x-1 rtl:space-x-reverse">
+                                <svg class="w-4 h-4 text-yellow-300"
+                                    aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="currentColor"
+                                    viewBox="0 0 22 20">
+                                    <path
+                                        d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                </svg>
 
+                            </div>
+                            <span
+                                class="font-semibold px-2.5 py-0.5 rounded-sm  ms-1 nums-font">{{prod.ratingsAverage}}</span>
                         </div>
-                        <span
-                            class="font-semibold px-2.5 py-0.5 rounded-sm  ms-1 nums-font">{{prod.ratingsAverage}}</span>
+                        <button
+                            (click)="wishListBtn(prod._id)"
+                            class="cursor-pointer rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
+                            <svg fill="currentColor" stroke-linecap="round"
+                                stroke-linejoin="round" stroke-width="2"
+                                class="w-5 h-5" viewBox="0 0 24 24 "
+                                [ngClass]="{'text-red-500': prod.inWislist}">
+                                <path
+                                    d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
+                            </svg>
+                        </button>
+
                     </div>
                     <div class="flex items-center justify-between mt-5">
                         <span
                             class="text-xl nums-font">{{prod.price |
                             currency: 'EGP ' : true}}</span>
+
                         <button (click)="addToCart(prod._id)"
                             class="cart btn-main px-7 py-2 md:translate-y-[200%] md:group-hover:translate-y-[0] md:duration-300 cursor-pointer myTransition translate-y-[0%]">
                             Add To Cart
@@ -70,5 +85,4 @@
         }
     </div>
 </div>
-
 }
