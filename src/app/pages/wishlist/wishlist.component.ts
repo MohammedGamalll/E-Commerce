@@ -1,8 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, PLATFORM_ID } from '@angular/core';
 import { WishlistService } from '../../core/services/wishlist/wishlist.service';
 import { IWishlist } from '../../core/interfaces/wishlist/iwishlist';
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, isPlatformBrowser } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-wishlist',
@@ -14,9 +15,19 @@ export class WishlistComponent {
   wishlist!: IWishlist;
   wishlistService = inject(WishlistService);
   toastr = inject(ToastrService);
+  _PLATFORM_ID = inject(PLATFORM_ID);
+  router = inject(Router);
+  isLoggedIn = false;
 
   ngOnInit(): void {
-    this.getWishlist();
+    if (isPlatformBrowser(this._PLATFORM_ID)) {
+      if (localStorage.getItem('token')) {
+        this.isLoggedIn = true;
+        this.getWishlist();
+      } else {
+        this.isLoggedIn = false;
+      }
+    }
   }
   getWishlist() {
     this.wishlistService.getWishlist().subscribe({

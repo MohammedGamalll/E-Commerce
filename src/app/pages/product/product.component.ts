@@ -1,9 +1,15 @@
-import { Component, inject, NgModule, OnInit } from '@angular/core';
+import {
+  Component,
+  inject,
+  NgModule,
+  OnInit,
+  PLATFORM_ID,
+} from '@angular/core';
 import { ProductsService } from '../../core/services/products/products.service';
 import { Observable } from 'rxjs';
 import { IProducts } from '../../core/interfaces/products/iproducts';
-import { CurrencyPipe, NgClass } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { CurrencyPipe, isPlatformBrowser, NgClass } from '@angular/common';
+import { Router, RouterLink } from '@angular/router';
 import { CartService } from '../../core/services/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';
@@ -33,6 +39,8 @@ export class ProductComponent implements OnInit {
   wishlistService = inject(WishlistService);
   isClicked = false;
   wishlist!: IWishlist;
+  _PLATFORM_ID = inject(PLATFORM_ID);
+  router = inject(Router);
 
   ngOnInit() {
     this.getAllProducts();
@@ -51,41 +59,57 @@ export class ProductComponent implements OnInit {
     });
   }
   addToCart(Pid: string) {
-    this.cartService.addProductToCart(Pid).subscribe({
-      next: (response) => {
-        this.cartService.countCartItems.next(response.numOfCartItems);
+    if (isPlatformBrowser(this._PLATFORM_ID)) {
+      if (localStorage.getItem('token')) {
+        this.cartService.addProductToCart(Pid).subscribe({
+          next: (response) => {
+            this.cartService.countCartItems.next(response.numOfCartItems);
 
-        this.toaster.success('Added To Cart Successfully', 'Success !');
-      },
-      error: (error) => {
-        console.log(error);
-      },
-    });
+            this.toaster.success('Added To Cart Successfully', 'Success !');
+          },
+          error: (error) => {
+            console.log(error);
+          },
+        });
+      } else {
+        this.toaster.error('Please Login First', 'Error !');
+        this.router.navigate(['/login']);
+      }
+    }
   }
 
   getWishlist() {
-    this.wishlistService.getWishlist().subscribe({
-      next: (response) => {
-        this.wishlist = response;
-        console.log(response);
-        for (let i = 0; i < this.wishlist.data.length; i++) {
-          for (let j = 0; j < this.allProducts.data.length; j++) {
-            if (this.wishlist.data[i]._id === this.allProducts.data[j]._id) {
-              console.log('wishlist data : ', this.wishlist.data[i]._id);
-              console.log('all products data : ', this.allProducts.data[j]._id);
-              this.allProducts.data[j].inWislist = true;
-              console.log(
-                'product wishlist : ',
-                this.allProducts.data[j].inWislist
-              );
+    if (isPlatformBrowser(this._PLATFORM_ID)) {
+      if (localStorage.getItem('token')) {
+        this.wishlistService.getWishlist().subscribe({
+          next: (response) => {
+            this.wishlist = response;
+            console.log(response);
+            for (let i = 0; i < this.wishlist.data.length; i++) {
+              for (let j = 0; j < this.allProducts.data.length; j++) {
+                if (
+                  this.wishlist.data[i]._id === this.allProducts.data[j]._id
+                ) {
+                  console.log('wishlist data : ', this.wishlist.data[i]._id);
+                  console.log(
+                    'all products data : ',
+                    this.allProducts.data[j]._id
+                  );
+                  this.allProducts.data[j].inWislist = true;
+                  console.log(
+                    'product wishlist : ',
+                    this.allProducts.data[j].inWislist
+                  );
+                }
+              }
             }
-          }
-        }
-      },
-      error: (error) => {
-        console.log(error);
-      },
-    });
+          },
+          error: (error) => {
+            console.log(error);
+          },
+        });
+      }
+    }
   }
 
   addToWishlist(Pid: string) {
@@ -124,21 +148,28 @@ export class ProductComponent implements OnInit {
   }
 
   wishListBtn(Pid: string) {
-    this.allProducts.data.forEach((product) => {
-      if (product._id === Pid) {
-        if (product.inWislist === undefined) {
-          product.inWislist = false;
+    if (isPlatformBrowser(this._PLATFORM_ID)) {
+      if (localStorage.getItem('token')) {
+        this.allProducts.data.forEach((product) => {
+          if (product._id === Pid) {
+            if (product.inWislist === undefined) {
+              product.inWislist = false;
+            }
+            this.isClicked = product.inWislist as boolean;
+            // console.log(this.isClicked);
+          }
+        });
+        if (this.isClicked === true) {
+          this.removeFromWishlist(Pid);
+          this.isClicked = false;
+        } else {
+          this.addToWishlist(Pid);
+          this.isClicked = true;
         }
-        this.isClicked = product.inWislist as boolean;
-        // console.log(this.isClicked);
+      } else {
+        this.toaster.error('Please Login First', 'Error !');
+        this.router.navigate(['/login']);
       }
-    });
-    if (this.isClicked === true) {
-      this.removeFromWishlist(Pid);
-      this.isClicked = false;
-    } else {
-      this.addToWishlist(Pid);
-      this.isClicked = true;
     }
   }
 }

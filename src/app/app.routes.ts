@@ -172,7 +172,7 @@ export const routes: Routes = [
   {
     path: '',
     component: MainLayoutComponent,
-    canActivate: [authGuard],
+    // canActivate: [authGuard],
     children: [
       {
         path: 'home',
@@ -213,6 +213,7 @@ export const routes: Routes = [
       },
       {
         path: 'cart',
+        canActivate: [authGuard],
         loadComponent: () =>
           import('./pages/cart/cart.component').then((e) => e.CartComponent),
         title: 'Fast-Cart Cart',
