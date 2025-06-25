@@ -172,4 +172,9 @@ export class ProductComponent implements OnInit {
       }
     }
   }
+  layout: number = 3; // default to 3 products per row
+
+  setLayout(n: number) {
+    this.layout = n;
+  }
 }

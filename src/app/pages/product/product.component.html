@@ -1,5 +1,5 @@
 @if (allProducts) {
-<div class="bg-main-000 container md:pt-[170px] pt-[200px] ">
+<div class="bg-main-000 md:pt-[170px] pt-[200px] ">
     <div class="w-2/3 mx-auto pt-10">
         <div class="w-full mb-2 relative">
             <input
@@ -14,14 +14,53 @@
         </div>
 
     </div>
-
-    <div class="flex flex-wrap bg-main-000 justify-center py-10 px-0 md:px-10">
-
+    <div class="flex gap-2 justify-end my-4 pe-5">
+        <button (click)="setLayout(3)"
+            [ngClass]="{'bg-main-200': layout === 3}" class="p-2 rounded">
+            <!-- 1 horizontal bar on small, 3 horizontal bars on md+ -->
+            <svg class="block md:hidden" width="24" height="24" fill="none">
+                <rect y="10" width="24" height="4" rx="2" fill="currentColor" />
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" width="24"
+                height="24" viewBox="0 0 24 24" class="hidden md:block">
+                <image
+                    xlink:href="data:image/png;base64,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"
+                    x="0" y="0" width="24" height="24" />
+            </svg>
+        </button>
+        <button (click)="setLayout(4)"
+            [ngClass]="{'bg-main-200': layout === 4}" class="p-2 rounded">
+            <!-- 2 vertical bars on small, 4 vertical bars on md+ -->
+            <svg class="block md:hidden" width="24" height="24" fill="none">
+                <rect x="5" y="4" width="3" height="16" rx="1.5"
+                    fill="currentColor" />
+                <rect x="16" y="4" width="3" height="16" rx="1.5"
+                    fill="currentColor" />
+            </svg>
+            <svg class="hidden md:block" width="24" height="24" fill="none">
+                <rect x="2" y="4" width="4" height="16" rx="1"
+                    fill="currentColor" />
+                <rect x="7" y="4" width="4" height="16" rx="1"
+                    fill="currentColor" />
+                <rect x="13" y="4" width="4" height="16" rx="1"
+                    fill="currentColor" />
+                <rect x="18" y="4" width="4" height="16" rx="1"
+                    fill="currentColor" />
+            </svg>
+        </button>
+    </div>
+    <div class="flex flex-wrap bg-main-000 justify-center py-10 px-0 md:px-5">
         @for (prod of allProducts.data | searchProduct: searchValue ; track
         prod.id) {
-
         <div
-            class="lg:w-1/3  md:w-1/2 w-full md:m-0 mx-4 p-4 bg-main-000">
+            [ngClass]="{
+                'w-full': layout === 3,
+                'w-1/2': layout === 4,
+                'md:w-1/3': layout === 3,
+                'md:w-1/4': layout === 4,
+                'md:m-0 p-4 bg-main-000': true
+            }">
             <div
                 class="inner bg-white  rounded-2xl card overflow-hidden group myTransition">
                 <a [routerLink]="['/details',prod._id]"
@@ -50,7 +89,6 @@
                                     <path
                                         d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
                                 </svg>
-
                             </div>
                             <span
                                 class="font-semibold px-2.5 py-0.5 rounded-sm  ms-1 nums-font">{{prod.ratingsAverage}}</span>
@@ -63,25 +101,25 @@
                                 class="w-5 h-5" viewBox="0 0 24 24 "
                                 [ngClass]="{'text-red-500': prod.inWislist}">
                                 <path
-                                    d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
+                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
                             </svg>
                         </button>
-
                     </div>
-                    <div class="flex items-center justify-between mt-5">
+                    <div
+                        class="flex md:flex-row flex-col items-center justify-between mt-5">
                         <span
-                            class="text-xl nums-font">{{prod.price |
+                            class="text-md nums-font md:mb-0 mb-4">{{prod.price
+                            |
                             currency: 'EGP ' : true}}</span>
 
                         <button (click)="addToCart(prod._id)"
-                            class="cart btn-main px-7 py-2 md:translate-y-[200%] md:group-hover:translate-y-[0] md:duration-300 cursor-pointer myTransition translate-y-[0%]">
+                            class="cart btn-main px-7 py-2 md:translate-y-[200%] md:group-hover:translate-y-[0] md:duration-300 cursor-pointer myTransition translate-y-[0%] md:text-md text-sm">
                             Add To Cart
                         </button>
                     </div>
                 </div>
             </div>
         </div>
-
         }
     </div>
 </div>
